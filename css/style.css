@@ -12,7 +12,7 @@
 *
 * ======================================================= */
 body {
-  font-family: "Raleway", Arial, sans-serif;
+  font-family: "Sawarabi Gothic", "Raleway", Arial, sans-serif;
   font-weight: 400;
   font-size: 16px;
   line-height: 1.7;
@@ -23,7 +23,7 @@ body {
 }
 
 a {
-  color: #272525;
+  color: #444444;
   -webkit-transition: 0.5s;
   -o-transition: 0.5s;
   transition: 0.5s;
@@ -38,8 +38,8 @@ p {
 }
 
 h1, h2, h3, h4, h5, h6, figure {
-  color: rgb(65, 58, 58);
-  font-family: "Raleway", Arial, sans-serif;
+  color: rgb(72, 72, 71);
+  font-family: "Raleway","Sawarabi Gothic", Arial, sans-serif;
   font-weight: 400;
   margin: 0 0 30px 0;
 }
@@ -1225,3 +1225,16 @@ h1, h2, h3, h4, h5, h6, figure {
 }
 
 /*# sourceMappingURL=style.css.map */
+.gara1 {
+  background: linear-gradient( 90deg,
+      rgba(255, 225, 132, .7) 50%, rgba(255,255,255, 0) 50%),
+    linear-gradient( 90deg,
+      rgba(32, 113, 120, .3) 50%, rgba(255,255,255, 0) 50%),
+    linear-gradient( 90deg,
+      rgba(255, 150, 102, .3) 50%, rgba(255,255,255, 0) 50%),
+    linear-gradient( 90deg,
+      rgba(23, 76, 79, .1) 50%, rgba(255,255,255, 0) 50%);
+  background-size: 7em 7em, 5em 5em, 3em 3em, 1em 1em;
+  background-color: #F5E9BE;
+  font: 10px/1.4 'Trebuchet MS', Verdana, sans-serif;
+  }
