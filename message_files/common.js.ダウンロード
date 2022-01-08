@@ -1,0 +1,247 @@
+//スムーススクロール
+$(function(){
+	$( "a[rel=scroll]" ).click(function(){
+		if($(this).hasClass('c_no_scroll')) {
+			return true;
+		}
+		var speed = 500;
+		var href= $(this).attr( 'href' );
+		var tgt = $( href == '#' || href == '' ? 'html' : href );
+		var position = tgt.offset().top;
+		$( 'html, body' ).animate({scrollTop:position}, speed, 'swing' );
+		return false;
+	});
+});
+
+$(function(){
+	$( '.design-list input[type=radio]' ).next( 'label' ).click(function(){
+		if( $(this).hasClass( 'checked' ) ) {
+			var speed = 500;
+			var tgt = $( 'input[type=submit]' );
+			var position = tgt.offset().top;
+			$( 'html, body' ).animate({scrollTop:position}, speed, 'swing' );
+		} else {
+			$( '.design-list label' ).each( function() {
+				$( this ).removeClass( 'checked' );
+			});
+			$( this ).addClass( 'checked' );
+		}
+	});
+});
+
+//g-nav
+$(function(){
+	var html 		= $( 'html' );
+	var header 		= $( '#header' );
+	var header_h 	= header.height();
+	$( '#sp-btn a' ).click(function(){
+		if( header.hasClass( 'nav-open' ) ) {
+			header.removeClass( 'nav-open' );
+			html.removeClass( 'lock' );
+		} else {
+			header.addClass( 'nav-open' );
+			html.addClass( 'lock' );
+		}
+		return false;
+	});
+	$( '.overlay' ).click(function(){
+		header.removeClass( 'nav-open' );
+		html.removeClass( 'lock' );
+		return false;
+	});
+
+	//スワイプで閉じる
+	var body = $( 'body' )
+	body.on( 'touchstart', onTouchStart); //指が触れたか検知
+	body.on( 'touchmove', onTouchMove); //指が動いたか検知
+	body.on( 'touchend', onTouchEnd); //指が離れたか検知
+	var direction, position;
+
+	//スワイプ開始時の横方向の座標を格納
+	function onTouchStart(event) {
+		position = getPosition(event);
+		direction = ''; //一度リセットする
+	}
+
+	//スワイプの方向（left／right）を取得
+	function onTouchMove(event) {
+		if (position - getPosition(event) > 90) { // 90px以上移動しなければスワイプと判断しない
+			direction = 'left'; //左と検知
+		} else if (position - getPosition(event) < -90){  // 90px以上移動しなければスワイプと判断しない
+			direction = 'right'; //右と検知
+		}
+	}
+
+	function onTouchEnd(event) {
+		if (direction == 'right' ){
+			header.removeClass( 'nav-open' );
+			html.removeClass( 'lock' );
+		} else if (direction == 'left' ){
+		}
+	}
+
+	//横方向の座標を取得
+	function getPosition(event) {
+		return event.originalEvent.touches[0].pageX;
+	}
+});
+
+//スクロールでナビ固定
+$(window).on( 'load', function(){
+	var header 		= $( '#header' );
+	var start_pos 	= 0;
+	var scroll_up 	= false;
+	var header_h 	= $( '#header h1' ).height();
+	$( window ).scroll( function(){
+		//スクロールの上下判定
+		var current_pos = $(this).scrollTop();
+		if ( current_pos > start_pos ) {
+			scroll_up = false;
+		} else {
+			scroll_up = true;
+		}
+		start_pos = current_pos;
+		var scroll_top = $( window ).scrollTop();
+		if( scroll_top > header_h ) {
+			header.addClass( 'fixed' );
+			if( scroll_up ) {
+				header.removeClass( 'hide' );
+				header.addClass( 'show' );
+			} else {
+				header.removeClass( 'show' );
+				header.addClass( 'hide' );
+			}
+		} else {
+			header.removeClass( 'fixed' );
+			header.removeClass( 'show' );
+			header.removeClass( 'hide' );
+		}
+	});
+});
+
+//アコーディオンメニュー .add2018
+$(function(){
+	$( '.add2018 dd' ).css( 'display', 'none' );
+	$( '.add2018 dt a' ).click(function(){
+		$(this).parent().next().slideToggle();
+		$(this).toggleClass("active");
+		return false;
+	});
+});
+
+//ロード時にスライドして表示
+$(function(){
+  var url = $(location).attr( 'href' );
+  if (!( url.indexOf( '#' ) != -1 || !( url.indexOf('party/invitation')))) {
+    var html 	= $( 'html' );
+    var wrapper = $( '#wrapper' );
+    html.addClass( 'lock' );
+    wrapper.css({
+      opacity: 0,
+      left: '50%'
+    });
+    wrapper.animate({
+      opacity: 1,
+      left : 0
+    },{
+      duration: 400,
+      easing: 'swing',
+      complete: function() {
+        html.removeClass( 'lock' );
+        $( '#header' ).css( 'position', 'fixed' );
+      }
+    });
+  }
+});
+
+//タブメニュー
+$(document).ready(function() {
+	//最初に表示するコンテンツ
+	$( '.tab-content' ).css( 'display', 'none' );
+	$( '.tab-content:first' ).css( 'display', 'block' );
+	//class="active"を追加
+	$( '.tab li:first' ).addClass( 'active' );
+
+	//クリックイベント
+	$( '.tab li' ).click(function() {
+		$( '.tab li' ).removeClass( 'active' );
+		$( this ).addClass( 'active' );
+		$( '.tab-content' ).css( 'display', 'none' );
+		$( $( this ).find( 'a' ).attr( 'href' )).css( 'display', 'block' );
+		return false;
+	});
+});
+
+//トップに戻るボタン
+$(function() {
+	var topBtn = $( '#page-top' );
+	topBtn.hide();
+	//スクロールが100に達したらボタン表示
+	$(window).scroll(function() {
+		if ($(this).scrollTop() > 150) {
+			topBtn.fadeIn();
+		} else {
+			topBtn.fadeOut();
+		}
+	});
+	//スクロールしてトップ
+	topBtn.click(function() {
+		$( 'body,html' ).animate({
+			scrollTop: 0
+		}, 500);
+		return false;
+	});
+});
+
+//inputをフォーカスで全選択
+$(function() {
+	$( 'input[type="text"], input[type="tel"], input[type="mail"], input[type="url"], input[type="number"], input[type="password"], textarea' ).focus(function() {
+	  if (!$(this).hasClass('c_no_select')) {
+			$(this).select();
+		}
+	});
+});
+
+//inputをフォーカスで全選択
+$(function() {
+	function set_data_val( ele ) {
+		var txt = ele.data( 'val' );
+		var val = ele.val();
+		if( !val ) {
+			ele.val( txt ).css( 'color', '#999' );
+		} else if( val == txt ) {
+			ele.val( '' ).css( 'color', '#000' );
+		} else {
+			ele.css( 'color', '#000' );
+		}
+	}
+	$( '.input-val' ).each( function() {
+		set_data_val( $(this) );
+	});
+	$( '.input-val' ).on( 'focus blur', function() {
+		set_data_val( $(this) );
+	});
+});
+
+//toggle-box の開閉
+$(function() {
+	$( '.toggle-box' ).css( 'display', 'none' );
+	$( '.toggle-btn a' ).click(function(){
+		$(this).parent().next().slideToggle();
+		return false;
+	});
+});
+
+//アンカーリンクスクロール
+/*$(window).load(function(){
+	var url = $(location).attr( 'href' );
+	var ost = 100;
+	if ( url.indexOf( '?id=' ) != -1 ) {
+		// スムーズスクロールの処理
+		var url_sp = url.split( '?id=' );
+		var hash = '#' + url_sp[url_sp.length - 1];
+		var tgt = $(hash);
+		var pos = tgt.offset().top - ost;
+		$( 'html, body' ).animate( { scrollTop:pos }, 500, 'swing' );
+	}
+});*/

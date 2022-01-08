@@ -1,0 +1,64 @@
+@charset "UTF-8";
+
+#dialog-message,
+#dialog-confirm {
+    display: none;
+    font-size: 1.4rem;
+}
+
+.ui-widget {
+    font-size: 1.3rem !important;
+}
+
+.ui-menu-item {
+    font-size: 1.7rem;
+    padding-top: 2px;
+    padding-bottom: 2px;
+}
+
+.hidden {
+    display: none;
+}
+
+.mt15 {
+    margin-top: 15px;
+}
+
+.c_disabled_menu {
+    color: #c9c9c9 !important;
+}
+
+#guest-add .zip input[type='text'], #guest-edit .zip input[type='text'] {
+    width: 6rem !important;
+}
+
+#account div.validate-error {
+    padding-left: 1.8rem;
+    position: relative;
+    color: #e57386;
+    background: #fffeee;
+    padding: 15px 15px 15px 35px;
+}
+
+#account div.validate-error::before {
+    content: url(svg/icon-30.svg);
+    display: inline-block;
+    width: 1.2rem;
+    position: absolute;
+    top: 12px;
+    left: 10px;
+}
+
+#account .width-g-recaptcha {
+    width: 248px !important;
+}
+
+.g-recaptcha-outter {
+    text-align: center;
+}
+
+.g-recaptcha {
+    display: inline-block;
+    text-align: left;
+    margin-bottom: 20px;
+}
