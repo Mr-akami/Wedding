@@ -5,7 +5,8 @@ $grid-gutter-width: 40px !default;
 $border-radius-base:  4px !default;
 $padding-base-vertical: 14px !default;
 
-$brand-primary: #27E1CE !default;
+$brand-primary: #2c6cf7 !default;
+// $brand-primary: #27E1CE !default;
 $brand-secondary: #3f95ea !default; 
 
 $brand-white: #fff;
@@ -1655,4 +1656,19 @@ h1, h2, h3, h4, h5, h6, figure {
 	.js & {
 		opacity: 0;
 	}
+}
+
+.colA {
+	float: left;
+	width: 50%;
+	border: solid;
+}
+
+.colB {
+	float: left;
+	width: 50%;
+}
+
+.col_row {
+	clear: both;
 }
