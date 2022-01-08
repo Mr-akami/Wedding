@@ -29,8 +29,8 @@ a {
   transition: 0.5s;
 }
 a:hover, a:active, a:focus {
-  color: #27E1CE;
-  outline: none;
+  /* color: #27E1CE; */
+  /* outline: none; */
 }
 
 p {
